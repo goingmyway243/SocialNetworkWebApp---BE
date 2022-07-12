@@ -10,7 +10,7 @@ using SocialNetworkWebApp.Context;
 namespace SocialNetworkWebApp.Migrations
 {
     [DbContext(typeof(SocialNetworkContext))]
-    [Migration("20220711144928_initDB")]
+    [Migration("20220712145815_initDB")]
     partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,7 +83,7 @@ namespace SocialNetworkWebApp.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommentEntity");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("SocialNetworkWebApp.Models.ContentEntity", b =>
@@ -114,13 +114,17 @@ namespace SocialNetworkWebApp.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("ContentEntity");
+                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("SocialNetworkWebApp.Models.FriendShipEntity", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("FriendId")
                         .HasColumnType("uniqueidentifier");
@@ -128,9 +132,17 @@ namespace SocialNetworkWebApp.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "FriendId");
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("FriendId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Friendships");
                 });

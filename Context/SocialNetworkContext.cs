@@ -15,20 +15,13 @@ namespace SocialNetworkWebApp.Context
 
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<FriendShipEntity>()
-                .HasKey(table => new { table.UserId, table.FriendId });
-            base.OnModelCreating(modelBuilder);
-        }
-
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<PostEntity> Posts { get; set; }
         public DbSet<ChatroomEntity> Chatrooms { get; set; }
         public DbSet<ContentEntity> Contents { get; set; }
-        public DbSet<FriendShipEntity> Friendships { get; set; }
+        public DbSet<FriendshipEntity> Friendships { get; set; }
         public DbSet<MessageEntity> Messages { get; set; }
         public DbSet<ReactEntity> Reacts { get; set; }
-        public DbSet<ContentEntity> Comments { get; set; }
+        public DbSet<CommentEntity> Comments { get; set; }
     }
 }

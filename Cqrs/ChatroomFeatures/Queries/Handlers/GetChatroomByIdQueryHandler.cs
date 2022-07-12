@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SocialNetworkWebApp.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,18 +9,16 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Queries.Handlers
 {
     public class GetChatroomByIdQueryHandler : IRequestHandler<GetChatroomByIdQuery, ChatroomEntity>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly ChatroomRepository _repository;
 
-        public GetChatroomByIdQueryHandler(SocialNetworkContext dbContext)
+        public GetChatroomByIdQueryHandler(ChatroomRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<ChatroomEntity> Handle(GetChatroomByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _dbContext
-                .Chatrooms
-                .FirstOrDefaultAsync(chatroom => chatroom.Id == request.Id);
+            return await _repository.GetById(request.Id);
         }
     }
 }

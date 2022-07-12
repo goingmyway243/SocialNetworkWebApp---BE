@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkWebApp.Models
 {
-    public class FriendShipEntity
+    public class FriendshipEntity : BaseEntity<Guid>
     {
         public enum FriendStatus
         {

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SocialNetworkWebApp.Context;
+using SocialNetworkWebApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +12,16 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands.Handlers
 {
     public class UpdateChatroomCommandHandler : IRequestHandler<UpdateChatroomCommand, Guid>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly ChatroomRepository _repository;
 
-        public UpdateChatroomCommandHandler(SocialNetworkContext dbContext)
+        public UpdateChatroomCommandHandler(ChatroomRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<Guid> Handle(UpdateChatroomCommand request, CancellationToken cancellationToken)
         {
-            var chatroomToUpdate = await _dbContext
-                .Chatrooms
-                .FirstOrDefaultAsync(chatroom => chatroom.Id == request.Id);
+            var chatroomToUpdate = await _repository.GetById(request.Id);
 
             if (chatroomToUpdate == null)
             {
@@ -31,9 +30,7 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands.Handlers
 
             chatroomToUpdate.ChatroomName = request.ChatroomName;
 
-            await _dbContext.SaveChangesAsync();
-
-            return chatroomToUpdate.Id;
+            return await _repository.Update(chatroomToUpdate);
         }
     }
 }

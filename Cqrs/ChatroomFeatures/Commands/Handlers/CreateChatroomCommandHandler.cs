@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,24 +9,19 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands.Handlers
 {
     public class CreateChatroomCommandHandler : IRequestHandler<CreateChatroomCommand, Guid>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly ChatroomRepository _repository;
 
-        public CreateChatroomCommandHandler(SocialNetworkContext dbContext)
+        public CreateChatroomCommandHandler(ChatroomRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<Guid> Handle(CreateChatroomCommand request, CancellationToken cancellationToken)
         {
             var newChatroom = new ChatroomEntity();
-
             newChatroom.ChatroomName = request.ChatroomName;
 
-            _dbContext.Chatrooms.Add(newChatroom);
-
-            await _dbContext.SaveChangesAsync();
-
-            return newChatroom.Id;
+            return await _repository.Create(newChatroom);
         }
     }
 }

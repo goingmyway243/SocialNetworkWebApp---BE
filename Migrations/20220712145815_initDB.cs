@@ -68,19 +68,22 @@ namespace SocialNetworkWebApp.Migrations
                 name: "Friendships",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FriendId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Friendships", x => new { x.UserId, x.FriendId });
+                    table.PrimaryKey("PK_Friendships", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Friendships_Users_FriendId",
                         column: x => x.FriendId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Friendships_Users_UserId",
                         column: x => x.UserId,
@@ -146,7 +149,7 @@ namespace SocialNetworkWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommentEntity",
+                name: "Comments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -158,15 +161,15 @@ namespace SocialNetworkWebApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CommentEntity", x => x.Id);
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CommentEntity_Posts_PostId",
+                        name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CommentEntity_Users_UserId",
+                        name: "FK_Comments_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -174,7 +177,7 @@ namespace SocialNetworkWebApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContentEntity",
+                name: "Contents",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -187,9 +190,9 @@ namespace SocialNetworkWebApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContentEntity", x => x.Id);
+                    table.PrimaryKey("PK_Contents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContentEntity_Posts_PostId",
+                        name: "FK_Contents_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
@@ -230,24 +233,29 @@ namespace SocialNetworkWebApp.Migrations
                 column: "ChatroomsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentEntity_PostId",
-                table: "CommentEntity",
+                name: "IX_Comments_PostId",
+                table: "Comments",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CommentEntity_UserId",
-                table: "CommentEntity",
+                name: "IX_Comments_UserId",
+                table: "Comments",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContentEntity_PostId",
-                table: "ContentEntity",
+                name: "IX_Contents_PostId",
+                table: "Contents",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Friendships_FriendId",
                 table: "Friendships",
                 column: "FriendId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friendships_UserId",
+                table: "Friendships",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_ChatroomId",
@@ -286,10 +294,10 @@ namespace SocialNetworkWebApp.Migrations
                 name: "ChatroomEntityUserEntity");
 
             migrationBuilder.DropTable(
-                name: "CommentEntity");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "ContentEntity");
+                name: "Contents");
 
             migrationBuilder.DropTable(
                 name: "Friendships");
