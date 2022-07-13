@@ -1,9 +1,6 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
+using SocialNetworkWebApp.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,29 +8,23 @@ namespace SocialNetworkWebApp.Cqrs.PostFeatures.Commands.Handlers
 {
     public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Guid>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly PostRepository _repository;
 
-        public DeletePostCommandHandler(SocialNetworkContext dbContext)
+        public DeletePostCommandHandler(PostRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<Guid> Handle(DeletePostCommand request, CancellationToken cancellationToken)
         {
-            var postToDelete = await _dbContext
-                .Posts
-                .FirstOrDefaultAsync(post => post.Id == request.Id);
+            var postToDelete = await _repository.GetById(request.Id);
 
             if(postToDelete == null)
             {
                 return default;
             }
 
-            _dbContext.Posts.Remove(postToDelete);
-
-            await _dbContext.SaveChangesAsync();
-
-            return postToDelete.Id;
+            return await _repository.Delete(postToDelete);
         }
     }
 }

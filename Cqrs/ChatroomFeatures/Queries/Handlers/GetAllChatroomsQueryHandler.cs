@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using SocialNetworkWebApp.Models;
 using SocialNetworkWebApp.Repositories;
 using System.Collections.Generic;

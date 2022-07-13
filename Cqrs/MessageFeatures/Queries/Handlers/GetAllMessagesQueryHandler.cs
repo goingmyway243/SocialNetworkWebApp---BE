@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
-using System;
+using SocialNetworkWebApp.Repositories;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,16 +9,16 @@ namespace SocialNetworkWebApp.Cqrs.MessageFeatures.Queries.Handlers
 {
     public class GetAllMessagesQueryHandler : IRequestHandler<GetAllMessagesQuery, IEnumerable<MessageEntity>>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly MessageRepository _repository;
 
-        public GetAllMessagesQueryHandler(SocialNetworkContext dbContext)
+        public GetAllMessagesQueryHandler(MessageRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<IEnumerable<MessageEntity>> Handle(GetAllMessagesQuery request, CancellationToken cancellationToken)
         {
-            return await _dbContext.Messages.ToListAsync();
+            return await _repository.GetAll();
         }
     }
 }

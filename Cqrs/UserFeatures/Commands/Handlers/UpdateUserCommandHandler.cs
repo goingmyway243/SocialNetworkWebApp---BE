@@ -1,9 +1,6 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
+using SocialNetworkWebApp.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,18 +8,16 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands.Handlers
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Guid>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly UserRepository _repository;
 
-        public UpdateUserCommandHandler(SocialNetworkContext dbContext)
+        public UpdateUserCommandHandler(UserRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<Guid> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var userToUpdate = await _dbContext
-                .Users
-                .FirstOrDefaultAsync(user => user.Id == request.Id);
+            var userToUpdate = await _repository.GetById(request.Id);
 
             if (userToUpdate == null)
             {
@@ -35,10 +30,9 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands.Handlers
             userToUpdate.LastName = request.LastName;
             userToUpdate.Phone = request.Phone;
             userToUpdate.DateOfBirth = request.DateOfBirth;
+            userToUpdate.UpdatedTime = DateTime.Now;
 
-            await _dbContext.SaveChangesAsync();
-
-            return userToUpdate.Id;
+            return await _repository.Update(userToUpdate);
         }
     }
 }

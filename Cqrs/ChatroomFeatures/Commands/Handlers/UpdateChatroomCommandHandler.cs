@@ -1,10 +1,6 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,6 +25,7 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands.Handlers
             }
 
             chatroomToUpdate.ChatroomName = request.ChatroomName;
+            chatroomToUpdate.UpdatedTime = DateTime.Now;
 
             return await _repository.Update(chatroomToUpdate);
         }

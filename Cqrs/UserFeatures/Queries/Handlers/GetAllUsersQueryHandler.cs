@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
-using System;
+using SocialNetworkWebApp.Repositories;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,16 +9,16 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Queries.Handlers
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<UserEntity>>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly UserRepository _repository;
 
-        public GetAllUsersQueryHandler(SocialNetworkContext dbContext)
+        public GetAllUsersQueryHandler(UserRepository repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<IEnumerable<UserEntity>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _repository.GetAll();
         }
     }
 }
