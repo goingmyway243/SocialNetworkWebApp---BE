@@ -59,3 +59,5 @@ D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetwo
 D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\obj\Debug\net5.0\SocialNetworkWebApp.genruntimeconfig.cache
 D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\MediatR.dll
 D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\MediatR.Contracts.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Code PJ\VisualStudioProjects\SocialNetworkWebApp\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
