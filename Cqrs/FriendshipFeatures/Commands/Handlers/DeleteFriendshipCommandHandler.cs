@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.FriendshipFeatures.Commands.Handlers
 {
     public class DeleteFriendshipCommandHandler : IRequestHandler<DeleteFriendshipCommand, Guid>
     {
-        private readonly FriendshipRepository _repository;
+        private readonly IRepository<FriendshipEntity> _repository;
 
-        public DeleteFriendshipCommandHandler(FriendshipRepository repository)
+        public DeleteFriendshipCommandHandler(IRepository<FriendshipEntity> repository)
         {
             _repository = repository;
         }

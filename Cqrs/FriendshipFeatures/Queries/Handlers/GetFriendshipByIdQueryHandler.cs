@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace SocialNetworkWebApp.Cqrs.FriendshipFeatures.Queries.Handlers
 {
     public class GetFriendshipByIdQueryHandler : IRequestHandler<GetFriendshipByIdQuery, FriendshipEntity>
     {
-        private readonly FriendshipRepository _repository;
+        private readonly IRepository<FriendshipEntity> _repository;
 
-        public GetFriendshipByIdQueryHandler(FriendshipRepository repository)
+        public GetFriendshipByIdQueryHandler(IRepository<FriendshipEntity> repository)
         {
             _repository = repository;
         }

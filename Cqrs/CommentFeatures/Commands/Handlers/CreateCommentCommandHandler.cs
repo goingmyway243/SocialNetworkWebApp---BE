@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.CommentFeatures.Commands.Handlers
 {
     public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, Guid>
     {
-        private readonly CommentRepository _repository;
+        private readonly IRepository<CommentEntity> _repository;
 
-        public CreateCommentCommandHandler(CommentRepository repository)
+        public CreateCommentCommandHandler(IRepository<CommentEntity> repository)
         {
             _repository = repository;
         }

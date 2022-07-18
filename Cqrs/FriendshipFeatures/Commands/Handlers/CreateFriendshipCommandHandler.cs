@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.FriendshipFeatures.Commands.Handlers
 {
     public class CreateFriendshipCommandHandler : IRequestHandler<CreateFriendshipCommand, Guid>
     {
-        private readonly FriendshipRepository _repository;
+        private readonly IRepository<FriendshipEntity> _repository;
 
-        public CreateFriendshipCommandHandler(FriendshipRepository repository)
+        public CreateFriendshipCommandHandler(IRepository<FriendshipEntity> repository)
         {
             _repository = repository;
         }

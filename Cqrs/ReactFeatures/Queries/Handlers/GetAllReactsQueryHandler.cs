@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.ReactFeatures.Queries.Handlers
 {
     public class GetAllReactsQueryHandler : IRequestHandler<GetAllReactsQuery, IEnumerable<ReactEntity>>
     {
-        private readonly ReactRepository _repository;
+        private readonly IRepository<ReactEntity> _repository;
 
-        public GetAllReactsQueryHandler(ReactRepository repository)
+        public GetAllReactsQueryHandler(IRepository<ReactEntity> repository)
         {
             _repository = repository;
         }

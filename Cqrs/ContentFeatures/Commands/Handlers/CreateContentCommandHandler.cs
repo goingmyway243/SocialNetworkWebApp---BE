@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.ContentFeatures.Commands.Handlers
 {
     public class CreateContentCommandHandler : IRequestHandler<CreateContentCommand, Guid>
     {
-        private readonly ContentRepository _repository;
+        private readonly IRepository<ContentEntity> _repository;
 
-        public CreateContentCommandHandler(ContentRepository repository)
+        public CreateContentCommandHandler(IRepository<ContentEntity> repository)
         {
             _repository = repository;
         }

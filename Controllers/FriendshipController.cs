@@ -14,9 +14,9 @@ namespace SocialNetworkWebApp.Controllers
     [ApiController]
     public class FriendshipController : ControllerBase
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public FriendshipController(Mediator mediator)
+        public FriendshipController(IMediator mediator)
         {
             _mediator = mediator;
         }

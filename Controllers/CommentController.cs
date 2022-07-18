@@ -1,11 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetworkWebApp.Cqrs.CommentFeatures.Commands;
 using SocialNetworkWebApp.Cqrs.CommentFeatures.Queries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetworkWebApp.Controllers
@@ -14,9 +11,9 @@ namespace SocialNetworkWebApp.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public CommentController(Mediator mediator)
+        public CommentController(IMediator mediator)
         {
             _mediator = mediator;
         }

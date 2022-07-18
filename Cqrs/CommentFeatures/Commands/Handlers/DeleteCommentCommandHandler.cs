@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.CommentFeatures.Commands.Handlers
 {
     public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, Guid>
     {
-        private readonly CommentRepository _repository;
+        private readonly IRepository<CommentEntity> _repository;
 
-        public DeleteCommentCommandHandler(CommentRepository repository)
+        public DeleteCommentCommandHandler(IRepository<CommentEntity> repository)
         {
             _repository = repository;
         }

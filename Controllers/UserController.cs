@@ -1,11 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetworkWebApp.Cqrs.UserFeatures.Commands;
 using SocialNetworkWebApp.Cqrs.UserFeatures.Queries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetworkWebApp.Controllers
@@ -14,9 +11,9 @@ namespace SocialNetworkWebApp.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public UserController(Mediator mediator)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }

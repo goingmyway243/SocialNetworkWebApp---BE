@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands.Handlers
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Guid>
     {
-        private readonly UserRepository _repository;
+        private readonly IRepository<UserEntity> _repository;
 
-        public DeleteUserCommandHandler(UserRepository repository)
+        public DeleteUserCommandHandler(IRepository<UserEntity> repository)
         {
             _repository = repository;
         }

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Queries.Handlers
 {
     public class GetChatroomByIdQueryHandler : IRequestHandler<GetChatroomByIdQuery, ChatroomEntity>
     {
-        private readonly ChatroomRepository _repository;
+        private readonly IRepository<ChatroomEntity> _repository;
 
-        public GetChatroomByIdQueryHandler(ChatroomRepository repository)
+        public GetChatroomByIdQueryHandler(IRepository<ChatroomEntity> repository)
         {
             _repository = repository;
         }

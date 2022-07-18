@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands.Handlers
 {
     public class UpdateChatroomCommandHandler : IRequestHandler<UpdateChatroomCommand, Guid>
     {
-        private readonly ChatroomRepository _repository;
+        private readonly IRepository<ChatroomEntity> _repository;
 
-        public UpdateChatroomCommandHandler(ChatroomRepository repository)
+        public UpdateChatroomCommandHandler(IRepository<ChatroomEntity> repository)
         {
             _repository = repository;
         }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands.Handlers
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Guid>
     {
-        private readonly UserRepository _repository;
+        private readonly IRepository<UserEntity> _repository;
 
-        public UpdateUserCommandHandler(UserRepository repository)
+        public UpdateUserCommandHandler(IRepository<UserEntity> repository)
         {
             _repository = repository;
         }

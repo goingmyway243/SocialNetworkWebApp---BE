@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.PostFeatures.Queries.Handlers
 {
     public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnumerable<PostEntity>>
     {
-        private readonly PostRepository _repository;
+        private readonly IRepository<PostEntity> _repository;
 
-        public GetAllPostsQueryHandler(PostRepository repository)
+        public GetAllPostsQueryHandler(IRepository<PostEntity> repository)
         {
             _repository = repository;
         }

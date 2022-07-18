@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.PostFeatures.Commands.Handlers
 {
     public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, Guid>
     {
-        private readonly PostRepository _repository;
+        private readonly IRepository<PostEntity> _repository;
 
-        public CreatePostCommandHandler(PostRepository repository)
+        public CreatePostCommandHandler(IRepository<PostEntity> repository)
         {
             _repository = repository;
         }

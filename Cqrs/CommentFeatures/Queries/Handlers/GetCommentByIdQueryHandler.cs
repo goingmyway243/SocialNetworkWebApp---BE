@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SocialNetworkWebApp.Context;
 using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,18 +9,16 @@ namespace SocialNetworkWebApp.Cqrs.CommentFeatures.Queries.Handlers
 {
     public class GetCommentByIdQueryHandler : IRequestHandler<GetCommentByIdQuery, CommentEntity>
     {
-        private readonly SocialNetworkContext _dbContext;
+        private readonly IRepository<CommentEntity> _repository;
 
-        public GetCommentByIdQueryHandler(SocialNetworkContext dbContext)
+        public GetCommentByIdQueryHandler(IRepository<CommentEntity> repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public async Task<CommentEntity> Handle(GetCommentByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _dbContext
-                .Comments
-                .FirstOrDefaultAsync(comment => comment.Id == request.Id);
+            return await _repository.GetById(request.Id);
         }
     }
 }

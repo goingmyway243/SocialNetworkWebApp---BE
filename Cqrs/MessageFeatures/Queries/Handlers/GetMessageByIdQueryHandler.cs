@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace SocialNetworkWebApp.Cqrs.MessageFeatures.Queries.Handlers
 {
     public class GetMessageByIdQueryHandler : IRequestHandler<GetMessageByIdQuery, MessageEntity>
     {
-        private readonly MessageRepository _repository;
+        private readonly IRepository<MessageEntity> _repository;
 
-        public GetMessageByIdQueryHandler(MessageRepository repository)
+        public GetMessageByIdQueryHandler(IRepository<MessageEntity> repository)
         {
             _repository = repository;
         }

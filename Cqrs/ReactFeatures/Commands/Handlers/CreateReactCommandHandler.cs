@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.ReactFeatures.Commands.Handlers
 {
     public class CreateReactCommandHandler : IRequestHandler<CreateReactCommand, Guid>
     {
-        private readonly ReactRepository _repository;
+        private readonly IRepository<ReactEntity> _repository;
 
-        public CreateReactCommandHandler(ReactRepository repository)
+        public CreateReactCommandHandler(IRepository<ReactEntity> repository)
         {
             _repository = repository;
         }

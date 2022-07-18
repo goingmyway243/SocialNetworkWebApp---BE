@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using SocialNetworkWebApp.Models;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,9 +8,9 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Queries.Handlers
 {
     public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserEntity>
     {
-        private readonly UserRepository _repository;
+        private readonly IRepository<UserEntity> _repository;
 
-        public GetUserByIdQueryHandler(UserRepository repository)
+        public GetUserByIdQueryHandler(IRepository<UserEntity> repository)
         {
             _repository = repository;
         }

@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ namespace SocialNetworkWebApp.Cqrs.PostFeatures.Commands.Handlers
 {
     public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, Guid>
     {
-        private readonly PostRepository _repository;
+        private readonly IRepository<PostEntity> _repository;
 
-        public DeletePostCommandHandler(PostRepository repository)
+        public DeletePostCommandHandler(IRepository<PostEntity> repository)
         {
             _repository = repository;
         }

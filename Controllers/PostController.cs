@@ -1,11 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetworkWebApp.Cqrs.PostFeatures.Commands;
 using SocialNetworkWebApp.Cqrs.PostFeatures.Queries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetworkWebApp.Controllers
@@ -14,9 +11,9 @@ namespace SocialNetworkWebApp.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public PostController(Mediator mediator)
+        public PostController(IMediator mediator)
         {
             _mediator = mediator;
         }

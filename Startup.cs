@@ -10,6 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SocialNetworkWebApp.Context;
+using SocialNetworkWebApp.Models;
+using SocialNetworkWebApp.Repositories;
+using SocialNetworkWebApp.Repositories.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +33,16 @@ namespace SocialNetworkWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
+
+            services.AddScoped<IRepository<ChatroomEntity>, ChatroomRepository>();
+            services.AddScoped<IRepository<CommentEntity>, CommentRepository>();
+            services.AddScoped<IRepository<ContentEntity>, ContentRepository>();
+            services.AddScoped<IRepository<FriendshipEntity>, FriendshipRepository>();
+            services.AddScoped<IRepository<MessageEntity>, MessageRepository>();
+            services.AddScoped<IRepository<PostEntity>, PostRepository>();
+            services.AddScoped<IRepository<ReactEntity>, ReactRepository>();
+            services.AddScoped<IRepository<UserEntity>, UserRepository>();
+
             services.AddDbContext<SocialNetworkContext>(
                 option =>
                 option.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
