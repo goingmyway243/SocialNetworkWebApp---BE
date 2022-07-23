@@ -24,6 +24,9 @@ namespace SocialNetworkWebApp.Cqrs.ContentFeatures.Commands.Handlers
             newContent.Type = request.Type;
             newContent.PostId = request.PostId;
 
+            newContent.CreatedTime = DateTime.Now;
+            newContent.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newContent);
         }
     }

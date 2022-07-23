@@ -23,6 +23,9 @@ namespace SocialNetworkWebApp.Cqrs.MessageFeatures.Commands.Handlers
             newMessage.UserId = request.UserId;
             newMessage.ChatroomId = request.ChatroomId;
 
+            newMessage.CreatedTime = DateTime.Now;
+            newMessage.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newMessage);
         }
     }

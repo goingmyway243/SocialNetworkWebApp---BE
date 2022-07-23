@@ -23,6 +23,9 @@ namespace SocialNetworkWebApp.Cqrs.FriendshipFeatures.Commands.Handlers
             newFriendship.FriendId = request.FriendId;
             newFriendship.Status = request.Status;
 
+            newFriendship.CreatedTime = DateTime.Now;
+            newFriendship.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newFriendship);
         }
     }

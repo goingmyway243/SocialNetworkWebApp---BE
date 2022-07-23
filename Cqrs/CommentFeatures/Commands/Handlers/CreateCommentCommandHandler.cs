@@ -23,6 +23,9 @@ namespace SocialNetworkWebApp.Cqrs.CommentFeatures.Commands.Handlers
             newComment.PostId = request.PostId;
             newComment.UserId = request.UserId;
 
+            newComment.CreatedTime = DateTime.Now;
+            newComment.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newComment);
         }
     }

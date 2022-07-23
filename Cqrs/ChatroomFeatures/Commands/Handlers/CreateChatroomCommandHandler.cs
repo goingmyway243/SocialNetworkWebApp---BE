@@ -21,6 +21,9 @@ namespace SocialNetworkWebApp.Cqrs.ChatroomFeatures.Commands.Handlers
             var newChatroom = new ChatroomEntity();
             newChatroom.ChatroomName = request.ChatroomName;
 
+            newChatroom.CreatedTime = DateTime.Now;
+            newChatroom.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newChatroom);
         }
     }

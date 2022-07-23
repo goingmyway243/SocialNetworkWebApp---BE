@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SocialNetworkWebApp.Models;
 using System;
 
 namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands
@@ -12,5 +13,6 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands
         public string LastName { get; set; }
         public string Phone { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public UserEntity.RoleType Role { get; set; }
     }
 }

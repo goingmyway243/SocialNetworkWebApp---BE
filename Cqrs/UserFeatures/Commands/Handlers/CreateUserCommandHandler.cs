@@ -26,6 +26,10 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands.Handlers
             newUser.LastName = request.LastName;
             newUser.Phone = request.Phone;
             newUser.DateOfBirth = request.DateOfBirth;
+            newUser.Role = request.Role;
+
+            newUser.CreatedTime = DateTime.Now;
+            newUser.UpdatedTime = DateTime.Now;
 
             return await _repository.Create(newUser);
         }

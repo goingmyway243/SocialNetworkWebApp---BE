@@ -12,7 +12,7 @@ namespace SocialNetworkWebApp.Context
         public SocialNetworkContext(DbContextOptions<SocialNetworkContext> options)
             : base(options)
         {
-
+            Database.Migrate();
         }
 
         public DbSet<UserEntity> Users { get; set; }

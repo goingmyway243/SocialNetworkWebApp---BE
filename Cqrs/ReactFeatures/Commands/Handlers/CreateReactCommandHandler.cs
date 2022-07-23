@@ -23,6 +23,9 @@ namespace SocialNetworkWebApp.Cqrs.ReactFeatures.Commands.Handlers
             newReact.PostId = request.PostId;
             newReact.UserId = request.UserId;
 
+            newReact.CreatedTime = DateTime.Now;
+            newReact.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newReact);
         }
     }

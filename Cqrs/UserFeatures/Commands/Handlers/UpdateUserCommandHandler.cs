@@ -31,6 +31,8 @@ namespace SocialNetworkWebApp.Cqrs.UserFeatures.Commands.Handlers
             userToUpdate.LastName = request.LastName;
             userToUpdate.Phone = request.Phone;
             userToUpdate.DateOfBirth = request.DateOfBirth;
+            userToUpdate.Role = request.Role;
+
             userToUpdate.UpdatedTime = DateTime.Now;
 
             return await _repository.Update(userToUpdate);

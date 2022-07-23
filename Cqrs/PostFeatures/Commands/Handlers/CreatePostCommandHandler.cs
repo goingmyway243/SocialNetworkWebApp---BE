@@ -24,6 +24,9 @@ namespace SocialNetworkWebApp.Cqrs.PostFeatures.Commands.Handlers
             newPost.UserId = request.UserId;
             newPost.SharePostId = request.SharePostId;
 
+            newPost.CreatedTime = DateTime.Now;
+            newPost.UpdatedTime = DateTime.Now;
+
             return await _repository.Create(newPost);
         }
     }
